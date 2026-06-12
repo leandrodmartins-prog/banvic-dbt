@@ -8,17 +8,6 @@ clientes as (
     select *
     from {{ ref('stg_erp__localidades') }}
 )
-
---, agencias as (
---    select *
---    from {{ ref('stg_erp__agencias') }}
---)
---
---, colaboradores as (
---    select *
---    from {{ ref('stg_erp__colaboradores') }}
---)
-
 , clientes_enriquecido as (
     select
         clientes.pk_cliente
@@ -32,20 +21,8 @@ clientes as (
         , clientes.cep_cliente
         , localidades.cidade as cidade_cliente
         , localidades.uf as uf_cliente
---        , agencias.nome_agencia
---        , agencias.tipo_agencia
---        , agencias.ts_abertura
---        , agencias.endereco_agencia
---        , colaboradores.nome_colaborador
---        , colaboradores.email_colaborador
---        , colaboradores.cpf_colaborador
---        , colaboradores.data_nascimento_colaborador
---        , colaboradores.endereco_colaborador
---        , colaboradores.cep_colaborador
     from clientes
     left join localidades on clientes.fk_localidade = localidades.pk_localidade
---    left join agencias on clientes.fk_agencia = agencias.pk_agencia
---    left join colaboradores on clientes.fk_colaborador = colaboradores.pk_colaborador
 )
 
 select *
